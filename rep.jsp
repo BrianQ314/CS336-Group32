@@ -44,6 +44,14 @@
                     <input type="submit" value="Submit"/>
                 </form><br/>
             </div>
+            <div style="border: 2px solid black; padding-left:15px; margin-top:4px;">
+                <p><b>View Waiting List</b></p><br/>
+                <form action="viewWaitingList.jsp" method="POST">
+                    Flight Airline: <input type="text" name="lineid" maxlength="2"/>
+                    Flight Number: <input type="number" name="flightnum"/>
+                    <input type="submit" value="Submit"/>
+                </form>
+            </div>
         <%
             }
         %>
