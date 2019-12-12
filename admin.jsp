@@ -68,6 +68,18 @@
                     <u>Sales for the Maximum Spending Customer:</u>
                     <input type="submit" value="Go"/>
                 </form>
+            </div><br/>
+            <div style="border:1px solid black; padding:10px;">
+                <p><b>Flight Information</b></p>
+                <form action="flightListAdmin.jsp" mehtod="POST">
+                    <input type="hidden" name="type" value="active"/>
+                    Most Active Flights: <input type="submit" value="Go"/>
+                </form>
+                <form action="flightListAdmin.jsp" mehtod="POST">
+                    <input type="hidden" name="type" value="port"/>
+                    Flights for Airport: <input type="text" name="portid" maxlength="3"/>
+                    <input type="submit" value="Go"/>
+                </form>
             </div>
         <%
             }
