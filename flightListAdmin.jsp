@@ -35,8 +35,22 @@
     }else{
         //Get the information submitted in the form
         String type = request.getParameter("type");
-        String lineid = request.getParameter("portid");
-        
+        String portid = request.getParameter("portid");
+%>
+        <a href='logout.jsp'>Log out</a> -- <a href='home.jsp'>Return To Home</a><br/>
+        <div style="border:1px solid black; padding:10px;">
+            <p><b>Search For Different Flight Information</b></p>
+            <form action="flightListAdmin.jsp" mehtod="POST">
+                <input type="hidden" name="type" value="active"/>
+                Most Active Flights: <input type="submit" value="Go"/>
+            </form>
+            <form action="flightListAdmin.jsp" mehtod="POST">
+                <input type="hidden" name="type" value="port"/>
+                Flights for Airport: <input type="text" name="portid" maxlength="3"/>
+                <input type="submit" value="Go"/>
+            </form>
+        </div>
+<%
         //Make sure the JDBC driver is properly loaded
         Class.forName("com.mysql.jdbc.Driver");
         //Connect to the database
@@ -82,7 +96,37 @@
         </table>
 <%
         }else{
-            
+            rs = st.executeQuery("SELECT * FROM Flights WHERE departure_pid = '" + portid + "' OR destination_pid = '" + portid + "';");
+            %>
+        <table>
+            <tr>
+                <td>Airline</td>
+                <td>Flight #</td>
+                <td>Type</td>
+                <td>Departure Time</td>
+                <td>Arrival Time</td>
+                <td>First-Class Fare</td>
+                <td>Econ-Class Fare</td>
+                <td>Aircraft ID</td>
+                <td>Departure Airport</td>
+                <td>Destination Airport</td>
+            </tr>
+            <%while(rs.next()){%>
+            <tr>
+                <td><%=rs.getString("lid")%></td>
+                <td><%=rs.getString("number")%></td>
+                <td><%=rs.getString("type")%></td>
+                <td><%=rs.getString("depart_time")%></td>
+                <td><%=rs.getString("arrive_time")%></td>
+                <td><%=rs.getString("fare_first")%></td>
+                <td><%=rs.getString("fare_economy")%></td>
+                <td><%=rs.getString("cid")%></td>
+                <td><%=rs.getString("departure_pid")%></td>
+                <td><%=rs.getString("destination_pid")%></td>
+            </tr>
+            <%}%>
+        </table>
+<%
         }
 %>
 
